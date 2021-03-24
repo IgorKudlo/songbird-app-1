@@ -1,16 +1,22 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react';
 
-const Answer = ({ birds }) => {
+const Answer = ({ birds, checkAnswer }) => {
 
   const [firstClick, setFirstClick] = useState(false);
   const [selectBird, setSelectBird] = useState(null);
 
+  const audioRef = useRef(null);
+
   const birdClickHandler = (bird) => {
     setFirstClick(true);
     setSelectBird(bird);
+    checkAnswer(bird.id);
+
+    if (audioRef.current) {
+      audioRef.current.load();
+    }
   };
 
-  console.log(selectBird)
   return (
     <div className="row mb2">
       {
@@ -57,7 +63,10 @@ const Answer = ({ birds }) => {
                           </li>
                           <li className="list-group-item">
                             <div className="audio-player">
-                              <audio
+                              <audio controls ref={audioRef}>
+                                <source src={selectBird.audio} type="audio/mpeg"/>
+                              </audio>
+                              {/*<audio
                                   src={selectBird.audio}
                                   hidden=""/>
                               <div className="controls">
@@ -76,7 +85,7 @@ const Answer = ({ birds }) => {
                                     <div>00:12</div>
                                   </div>
                                 </div>
-                              </div>
+                              </div>*/}
                             </div>
                           </li>
                         </ul>

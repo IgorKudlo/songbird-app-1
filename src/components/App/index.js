@@ -9,6 +9,7 @@ const App = () => {
   const [numberQuestion, setNumberQuestion] = useState(0);
   const [birds, setBirds] = useState(null);
   const [random,  setRandom] = useState(null);
+  const [rightAnswer, setRightAnswer] = useState(false);
 
   useEffect(() => {
     fetch('https://birds-app-779ec.firebaseio.com/birds.json')
@@ -21,12 +22,18 @@ const App = () => {
       });
   }, [numberQuestion]);
 
+  const checkAnswer = (id) => {
+      if (birds[random].id === id) {
+          setRightAnswer(true)
+      }
+  };
+
   return (
     <div className="container">
       <Header/>
       <GameOver/>
-      <Question />
-      <Answer birds={birds} />
+      <Question birds={birds} random={random} rightAnswer={rightAnswer} />
+      <Answer birds={birds} checkAnswer={checkAnswer} />
       <button className="btn">Next Level</button>
     </div>
   )
