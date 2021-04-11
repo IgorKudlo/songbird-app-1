@@ -11,6 +11,7 @@ const App = () => {
   const [random, setRandom] = useState(null);
   const [rightAnswer, setRightAnswer] = useState(false);
   const [isFinish, setIsFinish] = useState(false);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     fetch('https://birds-app-779ec.firebaseio.com/birds.json')
@@ -23,8 +24,9 @@ const App = () => {
       });
   }, [numberQuestion]);
 
-  const checkAnswer = (id) => {
+  const checkAnswer = (id, points) => {
     if (birds[random].id === id) {
+      setScore(score + points);
       setRightAnswer(true)
     }
   };
@@ -40,12 +42,12 @@ const App = () => {
 
   return (
     <div className="container">
-      <Header numberQuestion={numberQuestion}/>
+      <Header numberQuestion={numberQuestion} score={score}/>
       {
         !isFinish ?
           <>
             <Question birds={birds} random={random} rightAnswer={rightAnswer}/>
-            <Answer birds={birds} checkAnswer={checkAnswer}/>
+            <Answer birds={birds} checkAnswer={checkAnswer} rightAnswer={rightAnswer}/>
             <button
               className={`btn ${rightAnswer ? 'btn-next' : ''}`}
               disabled={!rightAnswer}
@@ -54,7 +56,7 @@ const App = () => {
               Next Level
             </button>
           </>
-          : <GameOver/>
+          : <GameOver score={score} />
       }
     </div>
   )

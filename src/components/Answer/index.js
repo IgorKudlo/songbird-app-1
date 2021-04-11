@@ -1,18 +1,24 @@
 import React, { useState, useEffect, useRef } from 'react';
 
-const Answer = ({ birds, checkAnswer }) => {
+const Answer = ({ birds, checkAnswer, rightAnswer }) => {
 
   const [selectBird, setSelectBird] = useState(null);
+  const [points, setPoints] = useState(5);
 
   const audioRef = useRef(null);
 
   useEffect(() => {
     setSelectBird(null);
+    setPoints(5);
   }, [birds]);
 
   const birdClickHandler = (bird) => {
     setSelectBird(bird);
-    checkAnswer(bird.id);
+    checkAnswer(bird.id, points);
+
+    if (!rightAnswer) {
+      if (points > 0) setPoints(points - 1);
+    }
 
     if (audioRef.current) {
       audioRef.current.load();
