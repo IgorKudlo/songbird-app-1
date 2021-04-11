@@ -3,6 +3,7 @@ import Header from '../Header';
 import GameOver from '../GameOver';
 import Question from '../Question';
 import Answer from '../Answer';
+import NextQuestion from "../NextQuestion";
 
 const App = () => {
 
@@ -46,6 +47,10 @@ const App = () => {
       >
         Next Level
       </button>
+      <NextQuestion
+        rightAnswer={rightAnswer}
+        handleNext={handleNext}
+      />
     </div>
   )
 };
