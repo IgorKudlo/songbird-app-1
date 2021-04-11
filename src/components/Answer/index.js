@@ -1,10 +1,14 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 
 const Answer = ({ birds, checkAnswer }) => {
 
   const [selectBird, setSelectBird] = useState(null);
 
   const audioRef = useRef(null);
+
+  useEffect(() => {
+    setSelectBird(null);
+  }, [birds]);
 
   const birdClickHandler = (bird) => {
     setSelectBird(bird);
