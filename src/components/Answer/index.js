@@ -2,13 +2,11 @@ import React, { useState, useRef } from 'react';
 
 const Answer = ({ birds, checkAnswer }) => {
 
-  const [firstClick, setFirstClick] = useState(false);
   const [selectBird, setSelectBird] = useState(null);
 
   const audioRef = useRef(null);
 
   const birdClickHandler = (bird) => {
-    setFirstClick(true);
     setSelectBird(bird);
     checkAnswer(bird.id);
 
@@ -44,29 +42,24 @@ const Answer = ({ birds, checkAnswer }) => {
             <div className="col-md-6">
               <div className="bird-details card">
                 {
-                  !firstClick ? (
-                    <p className="instruction">
-                      <span>Послушайте плеер.</span>
-                      <span>Выберите птицу из списка</span>
-                    </p>
-                  ) : (
+                  selectBird ? (
                     <>
-                      <div className="card-body">
-                        <img className="bird-image" src={selectBird.image}
-                             alt={selectBird.name}/>
-                        <ul className="list-group list-group-flush">
-                          <li className="list-group-item">
-                            <h4>{selectBird.name}</h4>
-                          </li>
-                          <li className="list-group-item">
-                            <span>{selectBird.species}</span>
-                          </li>
-                          <li className="list-group-item">
-                            <div className="audio-player">
-                              <audio controls ref={audioRef}>
-                                <source src={selectBird.audio} type="audio/mpeg"/>
-                              </audio>
-                              {/*<audio
+                        <div className="card-body">
+                          <img className="bird-image" src={selectBird.image}
+                               alt={selectBird.name}/>
+                          <ul className="list-group list-group-flush">
+                            <li className="list-group-item">
+                              <h4>{selectBird.name}</h4>
+                            </li>
+                            <li className="list-group-item">
+                              <span>{selectBird.species}</span>
+                            </li>
+                            <li className="list-group-item">
+                              <div className="audio-player">
+                                <audio controls ref={audioRef}>
+                                  <source src={selectBird.audio} type="audio/mpeg"/>
+                                </audio>
+                                {/*<audio
                                   src={selectBird.audio}
                                   hidden=""/>
                               <div className="controls">
@@ -86,12 +79,17 @@ const Answer = ({ birds, checkAnswer }) => {
                                   </div>
                                 </div>
                               </div>*/}
-                            </div>
-                          </li>
-                        </ul>
-                      </div>
-                      <span className="bird-description">{selectBird.description}</span>
-                  </>
+                              </div>
+                            </li>
+                          </ul>
+                        </div>
+                        <span className="bird-description">{selectBird.description}</span>
+                      </>
+                  ) : (
+                    <p className="instruction">
+                      <span>Послушайте плеер.</span>
+                      <span>Выберите птицу из списка</span>
+                    </p>
                   )
                 }
               </div>
