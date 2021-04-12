@@ -7,7 +7,7 @@ const GameOver = () => {
   const score = useSelector(state => state.score.score);
 
   const tryAgain = () => {
-    dispatch({type: 'SET_NUMBER_QUESTION', payload: 0})
+    dispatch({type: 'RESET_NUMBER_QUESTION'})
     dispatch({type: 'SET_SCORE', payload: 0})
     dispatch({type: 'SET_FINISH', payload: false});
     dispatch({type: 'SET_RIGHT_ANSWER', payload: false});
