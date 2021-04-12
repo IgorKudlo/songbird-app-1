@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 
 const Pagination = () => {
 
-  const numberQuestion = useSelector(state => state.numberQuestion);
+  const numberQuestion = useSelector(state => state.numberQuestion.numberQuestion);
 
   const listPagination = [
     { id: 0, title: 'Разминка' },

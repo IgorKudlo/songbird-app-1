@@ -5,7 +5,7 @@ import logo from '../../logo.svg'
 import Pagination from './Pagination';
 
 const Header = () => {
-  const score = useSelector(state => state.score)
+  const score = useSelector(state => state.score.score)
 
   return (
     <div className="header d-flex">

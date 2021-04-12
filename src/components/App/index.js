@@ -9,8 +9,8 @@ import NextQuestion from '../NextQuestion';
 
 const App = () => {
 
-  const numberQuestion = useSelector(state => state.numberQuestion)
-  const isFinish = useSelector(state => state.isFinish);
+  const numberQuestion = useSelector(state => state.numberQuestion.numberQuestion)
+  const isFinish = useSelector(state => state.finish.isFinish);
 
   const [birds, setBirds] = useState(null);
   const [random, setRandom] = useState(null);

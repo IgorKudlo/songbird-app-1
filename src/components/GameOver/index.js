@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from 'react-redux';
 const GameOver = () => {
   const dispatch = useDispatch();
 
-  const score = useSelector(state => state.score);
+  const score = useSelector(state => state.score.score);
 
   const tryAgain = () => {
     dispatch({type: 'SET_NUMBER_QUESTION', payload: 0})

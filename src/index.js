@@ -1,36 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
 import {Provider} from "react-redux";
 
+import {store} from './store';
 import reportWebVitals from './reportWebVitals';
 import App from './components/App/index';
 
 import './styles.scss';
-
-const defaultState = {
-    numberQuestion: 0,
-    isRightAnswer: false,
-    isFinish: false,
-    score: 0,
-}
-
-const reducer = (state = defaultState, action) => {
-    switch (action.type) {
-        case 'SET_NUMBER_QUESTION':
-            return {...state, numberQuestion: state.numberQuestion + 1}
-        case 'SET_RIGHT_ANSWER':
-            return {...state, isRightAnswer: action.payload}
-        case 'SET_SCORE':
-            return {...state, score: action.payload}
-        case 'SET_FINISH':
-            return {...state, isFinish: action.payload}
-        default:
-            return state;
-    }
-}
-
-const store = createStore(reducer);
 
 ReactDOM.render(
   <React.StrictMode>

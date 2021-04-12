@@ -5,7 +5,7 @@ import cover from '../../cover.jpg'
 
 const Question = ({ birds, random }) => {
 
-  const isRightAnswer = useSelector(state => state.isRightAnswer)
+  const isRightAnswer = useSelector(state => state.answer.isRightAnswer)
 
   const bird = birds && birds[random];
 

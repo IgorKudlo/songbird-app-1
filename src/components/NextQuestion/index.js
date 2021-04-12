@@ -4,8 +4,8 @@ import {useDispatch, useSelector} from 'react-redux';
 const NextQuestion = ({ birds }) => {
 
     const dispatch = useDispatch();
-    const numberQuestion = useSelector(state => state.numberQuestion);
-    const isRightAnswer = useSelector(state => state.isRightAnswer);
+    const numberQuestion = useSelector(state => state.numberQuestion.numberQuestion);
+    const isRightAnswer = useSelector(state => state.answer.isRightAnswer);
 
     const handleNext = () => {
         if (numberQuestion < birds.length-1) {

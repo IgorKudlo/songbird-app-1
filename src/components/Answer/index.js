@@ -5,8 +5,8 @@ const Answer = ({ birds, random }) => {
 
   const dispatch = useDispatch();
 
-  const isRightAnswer = useSelector(state => state.isRightAnswer)
-  const score = useSelector(state => state.score)
+  const isRightAnswer = useSelector(state => state.answer.isRightAnswer)
+  const score = useSelector(state => state.score.score)
 
   const [selectBird, setSelectBird] = useState(null);
   const [points, setPoints] = useState(5);
