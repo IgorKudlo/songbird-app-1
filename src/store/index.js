@@ -1,4 +1,5 @@
 import {combineReducers, createStore} from 'redux';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 import {answerReducer} from './answerReducer';
 import {finishReducer} from './finishReducer';
@@ -12,4 +13,4 @@ const rootReducer = combineReducers({
     score: scoreReducer,
 });
 
-export const store = createStore(rootReducer);
+export const store = createStore(rootReducer, composeWithDevTools());
