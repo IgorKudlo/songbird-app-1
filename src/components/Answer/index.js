@@ -1,6 +1,12 @@
 import React, { useState, useEffect, useRef } from 'react';
+import {useDispatch, useSelector} from "react-redux";
 
-const Answer = ({ birds, checkAnswer, rightAnswer }) => {
+const Answer = ({ birds, random }) => {
+
+  const dispatch = useDispatch();
+
+  const isRightAnswer = useSelector(state => state.isRightAnswer)
+  const score = useSelector(state => state.score)
 
   const [selectBird, setSelectBird] = useState(null);
   const [points, setPoints] = useState(5);
@@ -14,9 +20,12 @@ const Answer = ({ birds, checkAnswer, rightAnswer }) => {
 
   const birdClickHandler = (bird) => {
     setSelectBird(bird);
-    checkAnswer(bird.id, points);
+    if (birds[random].id === bird.id) {
+      dispatch({type: 'SET_SCORE', payload: score + points});
+      dispatch({type: 'SET_RIGHT_ANSWER', payload: true});
+    }
 
-    if (!rightAnswer) {
+    if (!isRightAnswer) {
       if (points > 0) setPoints(points - 1);
     }
 
@@ -24,6 +33,14 @@ const Answer = ({ birds, checkAnswer, rightAnswer }) => {
       audioRef.current.load();
     }
   };
+
+
+    /*const checkAnswer = (id, points) => {
+        if (birds[random].id === id) {
+            setScore(score + points);
+            dispatch({type: 'SET_RIGHT_ANSWER', payload: true});
+        }
+    };*/
 
   return (
     <div className="row mb2">

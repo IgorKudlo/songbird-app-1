@@ -1,6 +1,18 @@
 import React from 'react'
+import {useDispatch, useSelector} from 'react-redux';
 
-const GameOver = ({ score, tryAgain }) => {
+const GameOver = () => {
+  const dispatch = useDispatch();
+
+  const score = useSelector(state => state.score);
+
+  const tryAgain = () => {
+    dispatch({type: 'SET_NUMBER_QUESTION', payload: 0})
+    dispatch({type: 'SET_SCORE', payload: 0})
+    dispatch({type: 'SET_FINISH', payload: false});
+    dispatch({type: 'SET_RIGHT_ANSWER', payload: false});
+  };
+
   return (
     <div className="jumbotron game-over">
       <h1 className="display-3 text-center">Поздравляем!</h1>

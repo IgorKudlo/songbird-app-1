@@ -1,6 +1,9 @@
 import React from 'react';
+import {useSelector} from "react-redux";
 
-const Pagination = ({ numberQuestion }) => {
+const Pagination = () => {
+
+  const numberQuestion = useSelector(state => state.numberQuestion);
 
   const listPagination = [
     { id: 0, title: 'Разминка' },

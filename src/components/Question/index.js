@@ -1,8 +1,11 @@
 import React from 'react'
+import {useSelector} from "react-redux";
 
 import cover from '../../cover.jpg'
 
-const Question = ({ birds, random, rightAnswer }) => {
+const Question = ({ birds, random }) => {
+
+  const isRightAnswer = useSelector(state => state.isRightAnswer)
 
   const bird = birds && birds[random];
 
@@ -13,11 +16,11 @@ const Question = ({ birds, random, rightAnswer }) => {
           <h3>Загрузка ...</h3>
         ) : (
           <>
-            <img className="bird-image" src={rightAnswer ? bird.image : cover} alt="bird" />
+            <img className="bird-image" src={isRightAnswer ? bird.image : cover} alt="bird" />
             <div>
               <ul className="list-group list-group-flush">
                 <li className="list-group-item">
-                  <h3>{rightAnswer ? bird.name : '******'}</h3>
+                  <h3>{isRightAnswer ? bird.name : '******'}</h3>
                 </li>
                 <li className="list-group-item">
                   <div className="audio-player">

@@ -1,17 +1,19 @@
 import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
+
 import Header from '../Header';
 import GameOver from '../GameOver';
 import Question from '../Question';
 import Answer from '../Answer';
+import NextQuestion from '../NextQuestion';
 
 const App = () => {
 
-  const [numberQuestion, setNumberQuestion] = useState(0);
+  const numberQuestion = useSelector(state => state.numberQuestion)
+  const isFinish = useSelector(state => state.isFinish);
+
   const [birds, setBirds] = useState(null);
   const [random, setRandom] = useState(null);
-  const [rightAnswer, setRightAnswer] = useState(false);
-  const [isFinish, setIsFinish] = useState(false);
-  const [score, setScore] = useState(0);
 
   useEffect(() => {
     fetch('https://birds-app-779ec.firebaseio.com/birds.json')
@@ -24,46 +26,17 @@ const App = () => {
       });
   }, [numberQuestion]);
 
-  const checkAnswer = (id, points) => {
-    if (birds[random].id === id) {
-      setScore(score + points);
-      setRightAnswer(true)
-    }
-  };
-
-  const handleNext = () => {
-    if (numberQuestion < birds.length-1) {
-      setNumberQuestion(numberQuestion + 1);
-      setRightAnswer(false);
-    } else {
-      setIsFinish(true);
-    }
-  };
-
-  const tryAgain = () => {
-      setNumberQuestion(0);
-      setScore(0);
-      setIsFinish(false);
-      setRightAnswer(false);
-  };
-
   return (
     <div className="container">
-      <Header numberQuestion={numberQuestion} score={score}/>
+      <Header numberQuestion={numberQuestion} />
       {
         !isFinish ?
           <>
-            <Question birds={birds} random={random} rightAnswer={rightAnswer}/>
-            <Answer birds={birds} checkAnswer={checkAnswer} rightAnswer={rightAnswer}/>
-            <button
-              className={`btn ${rightAnswer ? 'btn-next' : ''}`}
-              disabled={!rightAnswer}
-              onClick={handleNext}
-            >
-              Next Level
-            </button>
+            <Question birds={birds} random={random} />
+            <Answer birds={birds} random={random} />
+            <NextQuestion birds={birds} />
           </>
-          : <GameOver score={score} tryAgain={tryAgain} />
+          : <GameOver />
       }
     </div>
   )
