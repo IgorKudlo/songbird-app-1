@@ -40,6 +40,13 @@ const App = () => {
     }
   };
 
+  const tryAgain = () => {
+      setNumberQuestion(0);
+      setScore(0);
+      setIsFinish(false);
+      setRightAnswer(false);
+  };
+
   return (
     <div className="container">
       <Header numberQuestion={numberQuestion} score={score}/>
@@ -56,7 +63,7 @@ const App = () => {
               Next Level
             </button>
           </>
-          : <GameOver score={score} />
+          : <GameOver score={score} tryAgain={tryAgain} />
       }
     </div>
   )
